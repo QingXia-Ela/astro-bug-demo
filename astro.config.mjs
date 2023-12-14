@@ -1,10 +1,18 @@
+// import HelloWorld from './src/integration/HelloWorld';
+// use resolve will cause pre building fail
+import HelloWorld from '@/integration/HelloWorld';
 import { defineConfig } from 'astro/config';
-import node from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
-  adapter: node({
-    mode: 'standalone'
-  })
+  integrations: [
+    HelloWorld()
+  ],
+  vite: {
+    resolve: {
+      alias: {
+        '@': '/src'
+      }
+    }
+  }
 });
